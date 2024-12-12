@@ -1,0 +1,25 @@
+name: Test Assignment
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. 코드 체크아웃
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # 2. Docker 이미지 빌드
+      - name: build in Docker
+        run: |
+          docker build -t os-assignment .
+
+      # 3. Docker 이미지 실행
+      - name: build in Docker
+        run: |
+          docker run --rm os-assignment
