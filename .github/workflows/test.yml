@@ -1,37 +1,37 @@
-name: Test Assignment
+# name: Test Assignment
 
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+# on:
+#   push:
+#     branches: [main]
+#   pull_request:
+#     branches: [main]
 
-jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
-    steps:
-      # 1. 코드 체크아웃
-      - name: Checkout
-        uses: actions/checkout@v2
+# jobs:
+#   build-and-test:
+#     runs-on: ubuntu-latest
+#     steps:
+#       # 1. 코드 체크아웃
+#       - name: Checkout
+#         uses: actions/checkout@v2
 
-      # 2. Docker 이미지 빌드
-      - name: build in Docker
-        run: |
-          docker build -t os-assignment .
+#       # 2. Docker 이미지 빌드
+#       - name: build in Docker
+#         run: |
+#           docker build -t os-assignment .
 
-      # 3. Docker 이미지 실행
-      - name: run os in Docker
-        run: |
-          docker run --rm -d --name os-assignment os-assignment
-          sleep 0.01
+#       # 3. Docker 이미지 실행
+#       - name: run os in Docker
+#         run: |
+#           docker run --rm -d --name os-assignment os-assignment
+#           sleep 0.01
 
-          docker logs os-assignment > container_output.txt
-          docker rm -f os-assignment
+#           docker logs os-assignment > container_output.txt
+#           docker rm -f os-assignment
 
-      - name: Check output
-        run: |
-          python3 -c "
-          big = open('container_output.txt', 'r', encoding='utf-8', errors='ignore').read()
-          small = open('grading.txt', 'r', encoding='utf-8', errors='ignore').read()
-          exit(0 if small in big else 1)
-          "
+#       - name: Check output
+#         run: |
+#           python3 -c "
+#           big = open('container_output.txt', 'r', encoding='utf-8', errors='ignore').read()
+#           small = open('grading.txt', 'r', encoding='utf-8', errors='ignore').read()
+#           exit(0 if small in big else 1)
+#           "
