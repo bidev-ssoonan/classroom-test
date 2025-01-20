@@ -22,4 +22,16 @@ jobs:
       # 3. Docker 이미지 실행
       - name: build in Docker
         run: |
-          docker run --rm os-assignment
+          docker run --rm -d --name os-assignment os-assignment
+          sleep 0.01
+
+          docker logs os-assignment > container_output.txt
+          docker rm -f os-assignment
+
+      - name: Check output
+        run: |
+          python3 -c "
+          big = open('container_output.txt', 'r', encoding='utf-8', errors='ignore').read()
+          small = open('grading.txt', 'r', encoding='utf-8', errors='ignore').read()
+          exit(0 if small in big else 1)
+          "
