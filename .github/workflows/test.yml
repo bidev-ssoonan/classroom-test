@@ -20,7 +20,7 @@ jobs:
           docker build -t os-assignment .
 
       # 3. Docker 이미지 실행
-      - name: build in Docker
+      - name: run os in Docker
         run: |
           docker run --rm -d --name os-assignment os-assignment
           sleep 0.01
